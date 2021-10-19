@@ -1,0 +1,75 @@
+<style type="text/css">
+	.form-check-input {
+		position: absolute;
+		margin-top: -0.3rem;
+		margin-left: -1.65rem;
+	}
+
+</style>
+
+<%# @avaliacao = Avaliacao.where(id: params[:id])[0] %>
+
+<div class="container mt-3">
+	<div class="card ">
+		<h5 class="card-header text-white bg-primary "><%=  "Prova de #{@disciplina.name} - Aluno: #{@avaliacao.name.upcase}" %></h5>
+		<div class="card-body">
+
+			<%= render partial: 'avaliacaos/shared/alert' %>
+
+			<table class="table table-sm">
+				<thead>
+			<% @provas.each do |prova| %>
+					<% color_th(Resposta.where(avaliacao_id: @avaliacao.id, prova_id: prova.id)) %>
+					<tr class="<%= @cor %>">
+						<th scope="col" width="20%"><%= @q = @q + 1 %> - </th>
+						<th scope="col"><%= prova.pergunta %></th>
+					</tr>
+				</thead>
+				<tbody>
+					<%= simple_form_for(@resposta, remote: true, defaults: { input_html: { class: 'form-control-sm' }, label_html: { class: 'col-form-label col-form-label-sm' } }) do |f| %>
+
+							<%= f.hidden_field :avaliacao_id, value: @avaliacao.id %>
+							<%= f.hidden_field :disciplina_id, value: @disciplina.id %>
+							<%= f.hidden_field :prova_id, value: prova.id %>
+							
+							<%  @opcao = Option.where(prova_id: prova.id).each do |opcao| %> 
+								<% label_field(opcao.arq_resposta) %>
+							<% end %>
+						<tr>
+							<% if prova.options.ids.count > 1 %>
+
+									<% @value = Resposta.where(avaliacao_id: @avaliacao.id).where(disciplina_id: @disciplina.id).where(prova_id: prova.id) %>
+									<% @value_certo = if @value.present? then @value[0].respondido else '' end %>
+			
+								<th scope="row"><%= f.input :respondido, label: 'Escolha uma opção.' , as: :radio_buttons, collection: @opcao, label_method: @name, checked: [@value_certo]  %> </th>
+							
+								<td colspan="2">
+									<% Option.where(prova_id: prova.id).each do |o| %>
+									<br>
+									<%= image_tag(o.arq_resposta.variant(resize_to_limit: [100, 100])) if o.arq_resposta.attached? %> <br>
+									<% end %>
+								</td>
+
+							<% else %>
+								<% @value = Resposta.where(avaliacao_id: @avaliacao.id).where(disciplina_id: @disciplina.id).where(prova_id: prova.id) %>
+									<% @value_certo = if @value.present? then @value[0].respondido else '' end %>
+
+								<td colspan="2"><%= f.input :respondido, label: false, as: :text, input_html: {value: @value_certo } %> </td>
+							<% end %>
+
+							<tr>
+								<td colspan="2"><%= f.submit 'Salvar', class: 'btn btn-info btn-sm' %>	</td>
+
+							</tr>
+						</tr>
+
+					<% end %> 
+			<% end %> 
+					</tbody>
+
+				</table>
+
+			</div>
+		</div>
+	</div>
+

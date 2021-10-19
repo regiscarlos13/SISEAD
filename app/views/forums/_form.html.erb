@@ -1,0 +1,29 @@
+
+<%= simple_form_for(@forum, defaults: { input_html: { class: 'form-control-sm' }, label_html: { class: 'col-form-label col-form-label-sm' } }) do |f| %>
+
+<div class="form-row">
+  <div class="col-sm-12 col-md-6 col-lg-5">
+    <%= f.input :aluno %>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-4">
+    <%= f.input :topico %>
+  </div>
+  
+  <div class="col-sm-12 col-md-6 col-lg-3">
+
+    <%= f.association :aula, collection: Aula.where(disciplina: cookies.encrypted[:selected_disciplina]), label_method: :name_aula, prompt: false %>
+  </div>
+  
+</div>
+<hr>
+
+<div align="left">
+<%= f.rich_text_area :duvida %>
+</div>
+
+
+<hr>
+
+<%= btn_save %> | <%= btn_cancel(forums_path) %>
+
+<% end %>

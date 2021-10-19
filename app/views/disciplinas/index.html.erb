@@ -1,0 +1,22 @@
+
+<div class="container" style="margin-top: 10%;">
+
+  <h1>Cadastro de Disciplinas</h1> <hr>
+  <div class="mb-3">
+    <%= btn_new(new_disciplina_path) %>
+  </div>
+
+
+  <div class="table-responsive">
+    <%= table_for(@disciplinas) do %>
+    <% field_table('Série')  { |f| "#{f.serie} - #{f.turma}" } %>
+    <% field_table('Disciplina')  { |f| f.name } %>
+    <% field_table('Professor')  { |f| f.professor } %>
+    <% btn_form %>
+    <% field_table('') { |f| (link_to 'Diário', diarios_path(f), class: 'btn btn-success btn-sm') } %>
+    
+    <% end %>
+  </div>
+
+
+</div>

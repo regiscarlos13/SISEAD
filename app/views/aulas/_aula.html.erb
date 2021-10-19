@@ -1,0 +1,39 @@
+ <p>
+ 
+ 	<div class="row">
+
+ 		<div class="col-sm-12 col-md-6 col-lg-4">
+ 			<iframe width="300" height="200" src="<%= aula.video %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ 		</div>
+ 		<div class="col-sm-12 col-md-6 col-lg-6">
+ 			<strong>Aula: </strong> <%= aula.aula %> - <%= data(aula.data) %><br>
+
+ 			<strong>Conteúdo: </strong><%= aula.conteudo %> <br>	
+
+ 			<strong>Vídeo: </strong><%= aula.video %> <br>	
+ 			
+ 			<strong>Agenda: </strong><%= aula.agenda %> <br>	
+ 			
+ 			<strong>Arquivos: </strong>
+
+ 			<ul>
+ 				<% aula.arquivos.each do |file| %>
+ 				<li><%= link_to file.filename, url_for(file), target: "_blank" %></li>
+ 				<% end %>
+ 			</ul>
+ 			
+ 			<%= link_to 'Apagar', [aula.disciplina, aula], 	method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm' %>
+			<%#= link_to "Modificar Aula", edit_disciplina_aula_path(@disciplina, aula) %>
+ 			
+ 		</div>
+
+ 	</div>
+
+ </p>
+ <hr>
+
+ 
+
+
+
+ 

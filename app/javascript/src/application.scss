@@ -1,0 +1,65 @@
+@import "toastify-js/src/toastify";
+@import "~bootstrap/scss/bootstrap";
+@import "@fortawesome/fontawesome-free";
+@import "trix/dist/trix";
+@import "./carrosel";
+@import "./sidebar";
+@import "./select2";
+
+//@import "./datatables";
+
+@import "./direct_uploads";
+
+@import "./button";
+
+
+
+ body {
+  background-color: #f3f5f6;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #262626;;
+}
+
+#ead_logo {
+    max-height: 300px;
+}
+
+#logo {
+    max-width: 700px;
+     
+    max-height: 300px;
+
+}
+
+#evento {
+	height: 14rem;
+}
+
+.map-responsive{
+    overflow:hidden;
+    padding-bottom:50%;
+    position:relative;
+    height:0;
+}
+.map-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+.aula-responsive{
+    overflow:hidden;
+    padding-bottom:50%;
+    position:relative;
+    height:0;
+}
+.aula-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+

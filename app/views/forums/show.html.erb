@@ -1,0 +1,57 @@
+<% @card_title = "Listagem da #{@forum.model_name.human(count: 1)}" %>
+
+<div align="left">
+	
+	<strong><%= translate 'activerecord.attributes.forum.topico' %>:</strong> <%= @forum.topico %> -
+	<strong>Duvida do <%= translate 'activerecord.attributes.forum.aluno' %>:</strong> <%= @forum.aluno %> -
+
+	<strong><%= translate 'activerecord.attributes.forum.aula' %>:</strong>	<%= "Aula - #{@forum.aula.aula}" %>
+	<hr>	
+	<p>
+
+		<strong><%= translate 'activerecord.attributes.forum.duvida' %>:</strong><%= @forum.duvida %>
+
+	</p>
+	<hr>	
+
+
+		<div class="card">
+			<div class="card-header" >
+				<b>Respostas</b> 
+			</div>
+			<div class="card-body">
+			 	<%= render @forum.responders %>
+
+			</div>
+		</div>
+	
+	<hr>
+
+
+	
+	<%= simple_form_for([ @forum, @forum.responders.build ], defaults: { input_html: { class: 'form-control-sm ' }, label_html: { class: 'col-form-label col-form-label-sm' } }) do |f| %>
+
+	<div class="form-row">
+
+		<div class="col-sm-12 col-md-12 col-lg-11">
+			<%= f.rich_text_area :resposta %>
+		</div>
+		
+
+		<div class="col-sm-12 col-md-12 col-lg-1" style="margin-top: 1.9rem;">
+			
+			<%= f.submit 'Salvar', class: 'btn btn-primary btn-sm' %> 
+		</div>
+	</div>
+
+	<% end %>
+
+	<br>
+	<div class="actions">
+		<%= btn_back(forums_path) %>
+	</div>
+
+
+
+
+</div>

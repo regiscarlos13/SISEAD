@@ -1,0 +1,56 @@
+<style type="text/css">
+
+
+	#logo {
+		width: 100px;
+		height: 100px;
+
+	}
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	td, th {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 8px;
+	}
+
+	th {
+		text-align: center;
+	}
+
+	tr:nth-child(even) {
+		background-color: #dddddd;
+	}
+	
+</style>
+
+
+<div class="container" style="max-width: 100%">
+
+
+
+	<p align="center" >
+		<%= wicked_pdf_image_tag 'http://educandariofatima.com.br/assets/logo-b05203934bd9ba5ee71a5cc9f5987d744a75adea50ef180f046ed52460411cf6.png', id: 'logo' %> <br>
+		 EDUCANDÁRIO NOSSA SENHORA DE FÁTIMA<br>
+		UMA NOVA VISÃO PARA O FUTURO
+	</p>
+
+
+	<h3 align="center"><%= "Avaliação de #{@disciplina.name} - #{@disciplina.serie} Ano - #{@disciplina.turma}" %></h3>
+	<h3><%= "Prof: #{@disciplina.professor}" %></h3>
+
+	<hr>
+
+	<%= table_for(@disciplina.avaliacaos) do %>
+	<% field_table('Nº')  { |f| f.n } %>
+	<% field_table('ALUNO')  { |f| f.name.upcase} %>
+	<% field_table('NOTA')  { |f| f.nota } %>
+
+	<% end %>
+
+
+</div>

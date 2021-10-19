@@ -1,0 +1,74 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js" integrity="sha256-+Q/z/qVOexByW1Wpv81lTLvntnZQVYppIL1lBdhtIq0=" crossorigin="anonymous"></script>
+
+
+<style type="text/css">
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    #logo {
+        width: 100px;
+        height: 100px;
+
+    }
+
+    img {
+        width: 40%;
+    }
+</style>
+
+<body>
+
+    <div class="container" style="margin-top: 5%;">
+
+        <p align="center">
+            <%= wicked_pdf_image_tag 'http://educandariofatima.com.br/assets/logo-b05203934bd9ba5ee71a5cc9f5987d744a75adea50ef180f046ed52460411cf6.png', id: 'logo' %> <br>
+            EDUCANDÁRIO NOSSA SENHORA DE FÁTIMA<br>
+            UMA NOVA VISÃO PARA O FUTURO
+        </p>
+
+
+        <h3 align="center"><%= "Avaliação de #{@disciplina.name} - #{@disciplina.serie} Ano - #{@disciplina.turma} - 2021" %></h3>
+
+        <h3><%= "Prof: #{@disciplina.professor}" %></h3>
+        <h3>Aluno: ________________________________________ </h3>
+
+        <% @q = 0 %>
+
+
+
+        <table class="table">
+            <% @provas.each do |f| %>
+            <tr>
+                <th><%= @q = @q + 1 %> - </th>
+                <th><%= f.pergunta %>
+                </th>
+            </tr>
+            <tbody>
+                <% Option.where(prova_id: f.id).each do |ff| %>
+                <tr>
+                    <td colspan="2"><%= inf_opcao(ff.correta, ff.tipo) %> <%= image_tag(ff.arq_resposta.variant(resize_to_limit: [50, 50])) if ff.arq_resposta.attached? %> <%= ff.name %></td>
+
+
+                </tr>
+                <% end %>
+            </tbody>
+            <% end %>
+        </table>

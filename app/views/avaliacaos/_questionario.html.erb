@@ -1,0 +1,148 @@
+<style type="text/css">
+	element {
+	}
+	.was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
+		color: white;;
+	}
+</style>
+
+
+<%= simple_form_for(@avaliacao, remote: true, defaults: { input_html: { class: 'form-control-sm ' }, label_html: { class: 'col-form-label col-form-label-sm' } }) do |avaliacao|%>
+
+<div class="form-row">
+	<div class="col">
+		<strong>Aluno:</strong> <%= @avaliacao.name %><br>
+		<strong>Nº:</strong> <%= @avaliacao.n %> <br>
+		<%= btn_back(correcao_path(@disciplina)) %>
+		
+	</div>
+	<div class="col-3">
+		
+		<%= avaliacao.input :nota %>
+	</div>
+	<div class="col">
+		<br>
+		<%= btn_save %>
+		
+	</div>
+</div>
+	<%= avaliacao.hidden_field :disciplina_id, value: @disciplina.id %>
+
+
+<% end %>
+<hr>
+
+<table class="table table-sm table-bordered">
+
+	<thead>
+		<% @provas.each do |prova| %>
+		
+
+		<% Option.where(prova_id: prova.id).where('tipo= ? OR correta= ?', 1, true).each do |ff| %> 
+
+		<% @avaliacao.respostas.where(prova_id: prova.id).each do |resposta|%>
+
+		<%# if ff.id == resposta.respondido.to_i %>
+		<%# elsif ff.tipo == 'Texto' %>
+		<%# @cor = 'text-white bg-info' %>
+		<%# else %>
+		<%# @cor = 'text-white bg-danger' %>
+
+		<% if ff.tipo == 'Texto' %>
+		
+		<% if resposta.certa.nil? %>
+		<% @cor = 'text-white bg-info' %>
+		<% elsif resposta.certa?  %>
+		<% @cor = 'text-white bg-success' %>
+		<% else %>
+		<% @cor = 'text-white bg-danger' %>
+		<% end %>
+
+
+
+		<% else %>
+
+		<% if resposta.certa? %>
+		<% @cor = 'text-white bg-success' %>
+
+		<% else %>
+		<% @cor = 'text-white bg-danger' %>
+
+		<% end %>
+
+
+		<% end %>
+
+		<% end %>
+		<% end %>
+		
+
+
+
+
+		<tr class="<%= @cor %>">
+
+			<% if Option.where(prova_id: prova.id).count <= 1 %>
+
+			<th scope="col"><%= @q = @q + 1 %> - </th>
+			<th scope="col"><%= prova.pergunta %></th>
+			<th scope="col">
+				
+				
+				<%# @resposta = Resposta.where(prova_id: prova.id) %>
+				
+
+				<% a = Resposta.where(prova_id: prova.id).where(avaliacao_id: params[:id]).where(disciplina_id: @disciplina).ids %>
+
+				<% if a.blank? %>
+				<% @resposta = Resposta.create(prova_id: prova.id, avaliacao_id: params[:id], disciplina_id: @disciplina.id, certa: 0) %>
+
+
+				<% else %>
+				<% @resposta = a.join.to_i %>
+				<% end %>
+
+
+				<%= simple_form_for(Resposta.find(@resposta), remote: true) do |resposta_texto| %>
+
+				<div class="row">
+					<div class="col">
+						<%= resposta_texto.input :certa, label: 'Certa?' %>
+					</div>
+					<div class="col">
+						<%= resposta_texto.submit 'salvar' %>
+					</div>
+					
+				</div>
+				<% end %>
+
+
+			</th>
+			<% else %>			
+			<th scope="col"><%= @q = @q + 1 %> - </th>
+			<th scope="col" colspan="2"><%= prova.pergunta %></th>
+			
+			<% end %>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% Option.where(prova_id: prova.id).each do |ff| %> 
+		<% @avaliacao.respostas.where(prova_id: prova.id).each do |resposta|%>
+		<tr>
+
+			<% if ff.tipo == 'Texto' %>
+			<td colspan="3"> <%= resposta.respondido %></td>
+			<% else %>
+			<td colspan="3"><%= inf_correcao(ff.correta, ff.tipo, resposta.respondido, ff.id, ff.name, ff.arq_resposta)  %> </td>
+			<% end %>
+
+
+		</tr>
+		<% end %> 
+		<% end %>
+		<% end %>
+	</tbody>
+
+
+</table>

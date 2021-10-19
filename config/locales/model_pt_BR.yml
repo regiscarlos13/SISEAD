@@ -1,0 +1,19 @@
+'pt-BR':
+  activerecord:
+    models:
+      disciplina:
+        one: Disciplina
+        other: Disciplinas
+     
+
+    attributes:
+      default: &default
+        id: Código
+        created_at: Criado em
+        updated_at: Atualizado em
+        type_person: Tipo de Pessoa
+       
+      disciplina:
+        <<: *default
+        name: Nome
+      

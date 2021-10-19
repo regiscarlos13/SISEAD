@@ -1,0 +1,53 @@
+<div class="container" style="margin-top: 5%;">
+	<h3>Prova de <%= @disciplina.name %> - <%= @disciplina.serie %></h3> 
+	<%= btn_back(planejamento_path) %> 
+
+	<hr>
+
+	<strong>Digite a pergunta:</strong>
+	<%= simple_form_for([ @disciplina, @disciplina.provas.build ], defaults: { input_html: { class: 'form-control-sm ' }, label_html: { class: 'col-form-label col-form-label-sm' } }) do |f| %>
+
+	<%= f.rich_text_area :pergunta %>
+
+	<div id="options">
+		<%= render partial: 'respostas', locals: { f: f } %>		
+	</div>
+
+	<br>
+
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+		Repostas
+	</button>
+
+	<% end %>
+
+
+
+	<hr>
+	<% @q = 0 %>
+
+	<table class="table">
+		<thead>
+			<% @provas.each do |f| %>
+			<tr>
+				<th scope="col"><%= @q = @q + 1 %> - </th>
+				<th scope="col"><%= f.pergunta %></th>
+				<th scope="col"><%= link_to 'Apagar', [f.disciplina, f], 	method: :delete, data: { confirm: 'Tem Certeza de apagar a questão?' }, class: 'btn btn-danger btn-sm' %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% Option.where(prova_id: f.id).each do |ff| %> 
+			<tr>
+				<td colspan="3"><%= inf_correta(ff.correta, ff.tipo) %> <%= image_tag(ff.arq_resposta.variant(resize_to_limit: [50, 50])) if ff.arq_resposta.attached? %> <%= ff.name %></td> 
+
+
+			</tr>
+			<% end %> 
+			<% end %> 
+		</tbody>
+	</table>
+
+
+</div>
+
+

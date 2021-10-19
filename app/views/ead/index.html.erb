@@ -1,0 +1,18 @@
+<% @card_title = "Bem vindo a Sala de Aula - Você estar na disciplina de #{@disciplina.name}" %>
+<% @card_title1 = "Você estar assistinado a aula - 01 de #{@disciplina.name} do #{@disciplina.serie} - #{@disciplina.turma}" %>
+
+<div align="center mt-5">
+
+	<% if @disciplina.serie == '1º' || @disciplina.serie ==  '2º' || @disciplina.serie ==  '3º' || @disciplina.serie ==  '4º'  %>
+	
+	<%= image_tag 'fund1.jpg', class: 'img-fluid', id: 'ead_logo' %>
+
+	<% elsif @disciplina.serie == '5º'|| @disciplina.serie ==  '6º' || @disciplina.serie == '7º' || @disciplina.serie ==  '8º' || @disciplina.serie ==  '9º' %>
+	
+	<%= image_tag 'fund2.jpg', class: 'img-fluid', id: 'ead_logo' %>
+	
+	<% else %>
+	<%= image_tag 'infatil.jpg', class: 'img-fluid', id: 'ead_logo' %>
+	<% end %>
+	
+</div>

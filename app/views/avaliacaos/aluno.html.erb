@@ -1,0 +1,38 @@
+<style type="text/css" media="screen">
+#lname	{
+	height: 30px;
+}
+</style>
+
+
+<div class="container mt-3">
+	<div class="card ">
+		<h5 class="card-header text-white bg-primary "><%=  "Prova de #{@disciplina.name}" %></h5>
+		<div class="card-body">
+
+		
+			<%= simple_form_for(@avaliacao, defaults: { input_html: { class: 'form-control-sm'  }, label_html: { class: 'col-form-label col-form-label-sm' } }  ) do |f| %>
+
+			<div class="form-row">
+				<div class="col-sm-12 col-md-8 col-lg-6">
+					<%= f.input :name, label: 'Nome Completo', input_html: {  style: 'text-transform:uppercase'} %>
+					
+
+				</div>
+				<div class="col-sm-12 col-md-2 col-lg-2">
+
+					<label for="lname">Número</label>
+					<input type="text" id="lname" name="lname" disabled value="<%= cookies.encrypted[:numero] %>"  class="form-control" >
+
+					<%= f.hidden_field :n, value: cookies.encrypted[:numero] %>
+
+					<%#= f.input :n, label: 'Número', input_html: {min: 1, value: cookies.encrypted[:numero]}, disabled: true  %>
+				</div>
+			</div>
+			<%= render partial: 'avaliacaos/shared/prova_question', locals: { f: f } %>
+			<hr>
+			<%= f.submit 'Finalizar', class: 'btn btn-success', data: { confirm: "Tem Certeza que terminou sua prova?" }  %>
+			<% end %>
+		</div>
+	</div>
+</div>

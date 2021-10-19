@@ -1,0 +1,23 @@
+	<div class="container mt-3">
+		<div class="card ">
+			<h5 class="card-header text-white bg-primary "><%=  "Alunos que fizeram a Prova de #{@disciplina.name}" %></h5>
+			<div class="card-body">
+				<div class="table-responsive">
+					
+					<%= link_to "Imprimir", correcao_path(params[:id], format: :pdf), target: "_blank", class: 'btn btn-warning float-right btn-sm' %>
+					<%= btn_back(planejamento_path) %> 
+					<hr>	
+					<%= table_for(@disciplina.avaliacaos) do %>
+					<% field_table('Nº')  { |f| f.n } %>
+					<% field_table('ALUNO')  { |f| link_to f.name.upcase, disciplina_aluno_prova_path(@disciplina.id, f)} %>
+					<% field_table('NOTA')  { |f| f.nota } %>
+					<% field_table('Imprimir')  { |f| link_to 'Prova', disciplina_aluno_prova_path(@disciplina.id, f, format: :pdf), target: "_blank", class: 'btn btn-warning btn-sm'} %>
+
+					<% end %>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+

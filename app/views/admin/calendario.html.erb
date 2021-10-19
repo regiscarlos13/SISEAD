@@ -1,0 +1,28 @@
+<div class="container mt-3">
+	<div class="card ">
+		<h5 class="card-header text-white bg-primary "><%= link_to ' Voltar', admin_index_path, class: 'btn btn-outline-light btn-sm' %> Calendário do <%= params[:id] ==  'Infantil' ? 'Infantil' : "#{params[:id]} - Ano"  %> </h5>  
+		<div class="card-body">
+      <% @series.each do |f| %>
+      <%= link_to   f ==  'Infantil' ? 'Infantil' : "#{f} - Ano"  , calendario_path(f), class: 'btn btn-outline-success' %>
+      <% end %>
+      <hr>
+      <% @disciplina.each do |f|%>
+      <%= simple_form_for(@calendar, remote: false, defaults: { input_html: { class: 'form-control-sm ' }, label_html: { class: 'acol-form-label col-form-label-sm' } }) do |calendar|%>
+        <% @calendario =  Calendar.where(disciplina_id: f.id).map {|cal| cal.data} %> 
+      <div class="form-row">
+        <div class="col-sm-3 col-md-2 col-lg-2">
+          <strong><%= f.name %>: </strong> 
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-3">
+        <%= calendar.input :data, label: false ,as: :string, input_html: { type: "date", value: @calendario } %>
+        </div>
+        <%= calendar.submit 'Salvar', class: 'btn btn-sm', params: { serie: f.serie}  %>
+        <%= calendar.hidden_field :disciplina_id, value: f.id %>
+
+
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+        
+  </div>

@@ -1,0 +1,31 @@
+  <!-- Modal -->
+  <div class="modal fade" id="mudar_disciplina" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Escolha de Turma</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= form_tag(mudar_disciplina_path, remote: true, method: "get") do %>
+        
+          <%= select_tag :disciplina_select, options_from_collection_for_select(@disciplinas.where(serie: @disciplina.serie, turma: @disciplina.turma).order(:name), "id", "serie_turma1", cookies.encrypted[:selected_disciplina]), :style => "width: 100%" %> <br>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+          <%= button_tag(type: 'submit', class: 'btn btn-primary', id: 'button_banco', name: nil) do %>
+          Escolher
+
+          <% end %>
+          <% end %>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,9 @@
+<% t = Time.new %>
+<%# if t.hour.between?(16,23) %>
+	<% Calendar.where(data: t, disciplina_id: @disciplina.id).each do |calendar|%>
+		<%= link_to "PROVA", aluno_path(@disciplina.id), class: 'list-group-item list-group-item-action bg-light' %>
+	<% end %>
+<%# end %>
+
+
+

@@ -1,0 +1,22 @@
+<div class="nested-fields">
+
+	<div class="form-row align-items-center">
+		<div class="col-5">
+			<%= f.input :name, label: 'Opção' %> 
+		</div>
+		<div class="col">
+			<%= f.input :tipo, collection: @tipos, prompt: false %> 
+
+		</div>
+		<div class="col">
+			<%= f.input :correta, label: 'Correta?' %> 
+
+		</div>
+
+	</div>
+	<%= f.file_field :arq_resposta, multiple: false %>
+
+		<%= link_to_remove_association('Apagar', f, class: 'btn btn-danger btn-sm')%> 
+
+</div>
+

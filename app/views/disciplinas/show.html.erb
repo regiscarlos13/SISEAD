@@ -1,0 +1,43 @@
+<script>
+	function goBack() {
+		window.history.back()
+	}
+</script>
+
+<div class="container" style="margin-top: 5%;">
+
+	<div class="alert alert-danger" role="alert">
+		- Todos os campos com * são obrigatório. AULA, DATA e CONTEUDO<br>
+		- As aulas estarão disponível aos alunos somente no dia da aula, atraves do campo data. <br>
+		- O campo aula será sequencial. Ex: 1, 2, 3 ..., não será permitido repetir o numero da aula. <br>
+		- Se as informações acimas não estiverem corretas não será permitido salvar a aula.
+	</div>
+
+
+	<p>
+		<strong>Name:</strong>
+		<%= @disciplina.name %>
+		<strong>Professor:</strong>
+		<%= @disciplina.professor %>
+		<strong>Serie:</strong>
+		<%= @disciplina.serie %>
+		<strong>Turma:</strong>
+		<%= @disciplina.turma %>
+
+	</p>
+	<div class="actions">
+		<button onclick="goBack()" class = 'btn btn-primary btn-sm'><i class="fa fa-arrow-left"> </i> Voltar</button>
+	</div>
+	<hr>
+
+	<h2>Nova Aula:</h2>
+
+	<%= render partial: 'form_aula' %>
+	<hr>
+
+	<h2>Aulas Gravadas</h2>
+
+	<%= render @disciplina.aulas %>
+
+
+</div>

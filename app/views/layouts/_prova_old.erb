@@ -1,0 +1,46 @@
+ <% t = Time.new %>
+
+
+<% case t.hour %>
+<% when 16..23 %> 
+
+<% case t.day %>
+<% when 5 %>
+
+<% case @disciplina.id %>
+<% when  33, 25, 41, 17, 59, 50, 70 %> 
+<%= link_to "PROVA", aluno_path(@disciplina.id), class: 'list-group-item list-group-item-action bg-light' %>
+<% end %>
+
+<% when 6 %>
+<% case @disciplina.id %>
+<%# when 49, 56, 64, 76, 82, 91, 92, 102 %> 
+<% when 34, 26, 42, 18, 60, 62, 51, 71, 72, 74 %> 
+<%= link_to "PROVA", aluno_path(@disciplina.id), class: 'list-group-item list-group-item-action bg-light' %>
+<% end %>
+
+
+<% when 7 %>
+<% case @disciplina.id %>
+<% when 37, 38, 30, 46, 22, 66, 61, 55, 73, 78 %> 
+<%= link_to "PROVA", aluno_path(@disciplina.id), class: 'list-group-item list-group-item-action bg-light' %>
+<% end %>
+
+<% when 8 %>
+<% case @disciplina.id %>
+<% when 35, 39, 27, 28, 43, 44, 19, 63, 64, 52, 53, 75, 76 %> 
+<%= link_to "PROVA", aluno_path(@disciplina.id), class: 'list-group-item list-group-item-action bg-light' %>
+<% end %>
+
+<% when 9 %>
+<% case @disciplina.id %>
+<% when 35, 40, 31, 32, 48, 49, 20, 24, 68, 69, 57, 58, 80, 81, 36 %> 
+<%= link_to "PROVA", aluno_path(@disciplina.id), class: 'list-group-item list-group-item-action bg-light' %>
+<% end %>
+
+<% else %>
+
+<% end %>
+
+<% end %>
+ 

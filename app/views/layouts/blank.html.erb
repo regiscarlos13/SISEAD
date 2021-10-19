@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Educandário Nossa Senhora de Fátima</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'%>
+  
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+
+  <%= favicon_link_tag 'favicon.ico' %>
+
+</head>
+
+
+<body data-flash-messages="<%= JSON.dump(flash.to_a) %>">
+  <div class="contanier">
+    
+    <nav class="navbar navbar-expand-lg navbar-dark border-bottom " style="background-color: #28166f">
+
+      <%= link_to 'Educandário', '' , class: 'navbar-brand' %>
+
+      <ul class="navbar-nav">
+        <%= link_to 'Sair', root_path, class: 'navbar-brand', data: { confirm: "Planejamento de Aulas?" } %>
+      </ul>
+
+
+    </nav>
+    <%= yield %>
+
+  </div>
+
+</body>
+</html>
+
+
+

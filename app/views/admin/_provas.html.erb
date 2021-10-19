@@ -1,0 +1,15 @@
+<div class="table-responsive">
+	<%= table_for(@disciplinas) do %>
+	<% field_table('Série')  { |f| "#{f.serie} - #{f.turma}" } %>
+	<% field_table('Disciplina')  { |f| f.name } %>
+	<% field_table('Prova Digitada?')  { |f| f.provas.count > 0 ? "#{f.provas.count} QTS" : 'Nenhuma' } %>
+
+	<% field_table('') { |f| link_to 'Apagar', provas_path(f),  method: :delete, data: { confirm: 'Tem Certeza que vai apagar as provas' }, class: 'btn btn-danger btn-icon-split btn-sm'  } %>
+
+	<% field_table('Avaliacão Resolvida')  { |f| f.avaliacaos.count > 0 ? "#{f.avaliacaos.count} Aluno(s)" : 'Nenhum' } %>
+
+	<% field_table('') { |f| link_to 'Apagar', admin_path(f),  method: :delete, data: { confirm: 'Tem Certeza que vai apagar as provas realizadas' }, class: 'btn btn-danger btn-icon-split btn-sm'  } %>
+	<% end %>
+</div>
+
+

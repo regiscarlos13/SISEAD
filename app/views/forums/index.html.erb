@@ -1,0 +1,12 @@
+<% @card_title = "Relação de #{@forums.model_name.human(count: 2)}" %>
+<%= @btn_new = btn_new(new_forum_path) %>
+<br>
+<br>
+<div class="table-responsive">
+  <%= table_for(@forums, 'index') do %>
+	     	<% field_table(@forums.model.human_attribute_name('tópico'))  { |f| link_to f.topico, f } %>
+        	<% field_table(@forums.model.human_attribute_name('aula'))  { |f| "Aula - #{f.aula.aula}" } %>
+        	<% field_table(@forums.model.human_attribute_name('aluno'))  { |f| f.aluno } %>
+         <%# btn_form %>
+  <% end %>
+</div>

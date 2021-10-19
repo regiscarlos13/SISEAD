@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Educandário Nossa Senhora de Fátima</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_pack_tag 'application' %>
+  <%= javascript_pack_tag 'application', 'ead_menu' %>
+  <%= favicon_link_tag 'favicon.ico' %>
+  
+
+
+</head>
+
+<body data-flash-messages="<%= JSON.dump(flash.to_a) %>">
+
+
+  <div class="d-flex" id="wrapper">
+    <div class="bg-light border-right" id="sidebar-wrapper">
+
+
+      <div class="sidebar-heading"><%= link_to @disciplina.name, ead_index_path, class: 'list-group-item-action bg-light' %></div>
+
+      <div class="list-group list-group-flush">
+
+        <% Aula.where(disciplina_id: cookies.encrypted[:selected_disciplina]).where("DATE(data) <= ? OR DATE(data) IS NULL", Date.today).order(:aula).last(7).each do |f| %>
+
+
+        <%= link_to "Aula - #{f.aula} - #{data(f.data)}", f, class: 'list-group-item list-group-item-action bg-light' %>
+
+        <% end  %>
+
+        <%= link_to "Tira Dúvidas", forums_path, class: 'list-group-item list-group-item-action bg-light' %>
+
+        
+
+        <%= render partial: 'layouts/prova' %>
+
+
+        <%#= link_to "PROVA", aluno_path(@disciplina.id), class: 'list-group-item list-group-item-action bg-light' %>
+
+        <%#= a = Aula.where('extract(month from data) = ?', [1, 2, 3, 4, 5]) %>
+        <%#= d = Diario.where('extract(day from created_at) = ?', [6, 7]) %>
+
+
+      </div>
+
+
+    </div>
+
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-dark border-bottom " style="background-color: #28166f">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="menu-toggle">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+
+        <%= link_to 'SALA DE AULA', ead_index_path, class: 'navbar-brand' %>
+
+        <%= link_to 'Mudar Disciplina', nil , class: 'navbar-brand btn btn-outline-success',  data: {toggle: "modal", target: "#mudar_disciplina"}  %>
+
+        <%= link_to 'Sair', root_path, class: 'navbar-brand', data: { confirm: "Sair da Sala de Aula?" } %>
+
+        
+
+      </ul>
+    </nav>
+
+
+
+    <div class="container mt-5" >
+      <div class="card">
+        <div class="card-header" >
+          <b><%= @card_title %></b> 
+        </div>
+        <div class="card-body" align="center">
+
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+
+
+<%= render partial: 'layouts/mudar_disciplina_modal' %>

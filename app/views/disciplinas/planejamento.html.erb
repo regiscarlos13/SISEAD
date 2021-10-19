@@ -1,0 +1,19 @@
+<div class="container" style="margin-top: 10%;">
+
+  <h1>Cadastro de Aulas</h1> <hr>
+
+
+  <div class="table-responsive">
+    <%= table_for(@disciplinas) do %>
+    <% field_table('Série')  { |f| "#{f.serie} - #{f.turma}" } %>
+    <% field_table('Disciplina')  { |f| link_to f.name, f } %>
+    <% field_table('Professor')  { |f| f.professor } %>
+    <% field_table('') { |f| btn_show(f) } %>
+    <% field_table('') { |f| (link_to 'Prova', provas_path(f), class: 'btn btn-primary btn-sm') } %>
+    <% field_table('') { |f| (link_to 'Correção', correcao_path(f), class: 'btn btn-success btn-sm') } %>
+    <% field_table('') { |f| (link_to 'Diário', diarios_path(f), class: 'btn btn-success btn-sm') } %>
+    <% end %>
+  </div>
+
+
+</div>

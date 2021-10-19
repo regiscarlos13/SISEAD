@@ -1,0 +1,31 @@
+<div class="container mt-3">
+	<div class="card ">
+		<h5 class="card-header text-white bg-primary "><%=  "Prova de #{@disciplina.name}" %></h5>
+		<div class="card-body">
+
+			<div class="alert alert-danger" role="alert">
+				- Preencha a prova com seu nome completo e número. <br>
+				- Todas as perguntas tem que ser revolvidas.
+			</div>
+
+			<%= form_with scope: :avaliacao, local: true do |form| %>
+			<p>
+				<%= form.label :title %><br>
+				<%= form.text_field :name %>
+			</p>
+
+			<p>
+				<%= form.label :text %><br>
+				<%= form.number_field :n%>
+			</p>
+
+			<p>
+				<%= form.submit %>
+			</p>
+			<% end %>
+
+
+
+		</div>
+	</div>
+</div>

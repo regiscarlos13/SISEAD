@@ -1,0 +1,49 @@
+<% if @disciplina.aulas.last.blank? %>
+
+<%  @num_aula = 1 %>
+<% else %>
+<%  @num_aula = @disciplina.aulas.last.aula + 1 %>
+
+<% end %>
+
+<%= simple_form_for([ @disciplina, @disciplina.aulas.build ], defaults: { input_html: { class: 'form-control-sm ' }, label_html: { class: 'col-form-label col-form-label-sm' } }) do |f| %>
+
+<div class="form-row">
+
+	<div class="col-sm-12 col-md-6 col-lg-1">
+		<%= f.input :aula, input_html: { value: @num_aula} %>
+	</div>
+	<div class="col-sm-12 col-md-6 col-lg-2">
+		<%= f.input :data, as: :string, input_html: { type: "date"} %>
+	</div>
+	
+	<div class="col-sm-12 col-md-6 col-lg-3">
+		<%= f.input :conteudo %>
+	</div>
+	<div class="col-sm-12 col-md-6 col-lg-4">
+		<%= f.input :video %>
+	</div>
+	<div class="col-sm-12 col-md-6 col-lg-2">
+		<%= f.file_field :arquivos, multiple: true, accept: 'application/pdf' %>
+	</div>
+</div>
+
+
+
+
+<div class="form-row">
+
+	<div align="left" class="col-sm-12 col-md-6 col-lg-8" >
+		<%= f.label 'Agenda' %>
+		<%= f.rich_text_area :agenda %>
+	</div>
+	<div class="col-sm-12 col-md-6 col-lg-1" style="margin-top: 1.9rem;">
+		
+		<%= f.submit 'Salvar', class: 'btn btn-primary btn-sm' %> 
+	</div>
+</div>
+
+
+
+
+<% end %>

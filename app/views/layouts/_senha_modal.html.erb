@@ -1,0 +1,40 @@
+<div class="modal fade" id="senha_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Escolha de Turma</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_tag(senha_path, remote: true, method: "get") do %>
+          
+          <p class="text-danger">Será obrigatório o preenchimento do campo Nº chamada</p>
+
+        <div class="form-row">
+          <div class="col">
+            <%= select_tag :disciplina_select, options_from_collection_for_select(@disciplinas.uniq { |h| [h[:serie] , h[:turma]] }, "id", "serie_turma", cookies.encrypted[:selected_disciplina]), style: "width: 100%" %> <br> 
+
+          </div>
+          <div class="col">
+            Nº Chamada: <%= number_field_tag :numero, cookies.encrypted[:numero], style: "width: 40%",  min: 1  %>
+
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <%= label_tag 'Senha:' %>
+          <%= password_field_tag :senha, cookies.encrypted[:senha] %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <%= button_tag(type: 'submit', class: 'btn btn-primary', id: 'button_banco', name: nil) do %>
+        Escolher
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

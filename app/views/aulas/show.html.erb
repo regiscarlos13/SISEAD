@@ -1,0 +1,27 @@
+<% @card_title = "Você estar assistinado a aula - #{@aula.aula} de #{@aula.disciplina.name}" %>
+<strong>Aula de Hoje: </strong><%= @aula.conteudo %> <br>
+<hr>
+
+<% if @aula.video.present? %>
+<div class="aula-responsive border">
+	<iframe  src="<%= @aula.video %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<% else %>
+<strong>Aula Sem Vídeo</strong>
+<% end %>
+
+<hr>
+<strong>Agenda</strong>
+
+<%= @aula.agenda %>
+
+<hr>
+<strong>Arquivos</strong>
+
+<ul>
+	<% @aula.arquivos.each do |file| %>
+	<li><%= link_to file.filename, url_for(file), target: "_blank" %></li>
+	<% end %>
+</ul>
+
+
